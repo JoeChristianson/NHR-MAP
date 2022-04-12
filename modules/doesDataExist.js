@@ -3,12 +3,16 @@ const util = require("util")
 const readFilePromise = util.promisify(readFile);
 const writeFilePromise = util.promisify(writeFile)
 
-const write = async (county,state,places)=>{
+const doesDataExist = async (county,state)=>{
     const data = await readFilePromise(`../data/${state}.json`,"utf-8")
     const obj = JSON.parse(data);
-    obj[county] = places;
-    const str = JSON.stringify(obj)
-    writeFilePromise(`../data/${state}.json`,str)
+    if (!obj[county]){
+        console.log(false)
+        return false;
+    }
+    else {
+        console.log(true)
+        return true;}
 }
 
-module.exports = {write}
+doesDataExist("Bottineau","North_Dakota");

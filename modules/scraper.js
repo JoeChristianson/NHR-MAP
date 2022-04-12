@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer')
-const dataWriter = require("./dataWriter")
+const {write} = require("./dataWriter")
 
 async function scrape(county,state){
     const browser = await puppeteer.launch({
@@ -35,7 +35,8 @@ async function scrape(county,state){
         }
         places.push(place)
     }
-    
+    write(county,state,places)
+    return places;
 }
 
 scrape(process.argv[2],process.argv[3])
