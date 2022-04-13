@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/JoeChristianson/NHR-MAP#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.3",
     "puppeteer": "^13.5.2"
   }

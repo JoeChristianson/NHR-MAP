@@ -8,14 +8,15 @@ const {scrape} = require("./scraper")
 
 const getCountyData = async (county,state)=>{
     if (await doesDataExist(county,state)){
-        const data = readFilePromise(`../data/${state}.json`,"utf-8");
-
+        const data = await readFilePromise(`./data/${state}.json`,"utf-8");
+        console.log(typeof data)
+        console.log(data)
         return(data)
     }
     else {
         const data = await scrape(county,state);
-
-        return data;
+        const dataString = await JSON.stringify(data)
+        return dataString;
     }    
 }
 

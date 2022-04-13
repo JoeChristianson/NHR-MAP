@@ -12,14 +12,15 @@
       async
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD4adZgZWDQxIUdGKvJcB8ArE42C-wegE&callback=initMap"
     ></script>
+    <script src="./assets/scripts/utils.js"></script>
     <script src="./assets/scripts/nhrCall.js"></script>
     <script src="./assets/scripts/eventListeners.js" defer></script>
   </head>
   <body>
     <header>
       <h3>My Google Maps Demo</h3>
-      <input type="text" id="county" placeholder="County" />
-      <input type="text" id="state" placeholder="State" />
+      <input type="text" id="county-input" placeholder="County" />
+      <input type="text" id="state-input" placeholder="State" />
       <button id="search-btn">Search</button>
     </header>
     <div id="map"></div>

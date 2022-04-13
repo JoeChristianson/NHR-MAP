@@ -10,16 +10,14 @@ async function scrape(county,state){
     const page = await browser.newPage();
     await page.goto(url);
     const headings = await page.evaluate(()=> Array.from(document.querySelectorAll('.sortable .mapframe-coord-name a'),element=> [element.textContent,element.href]));
-    console.log(headings[0])
     const images = await page.evaluate(()=> Array.from(document.querySelectorAll('tbody .center a.image img,td .plainlinks.metadata.noprint small a'),element=> element.src,));
-    console.log(images[0])
     const addresses = await page.evaluate(()=> Array.from(document.querySelectorAll('.adr span.label'),element=> element.textContent));
-    const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.latitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
-    const longitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.longitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
+    const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.latitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"], .adr'),element=> element.textContent));
+    // const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.adr'),element=> element.textContent));
+    console.log("hey")
+    const longitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.longitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"], .adr'),element=> element.textContent));
     const localities = await page.evaluate(()=> Array.from(document.querySelectorAll('.locality'),element=> element.textContent));
     const restr = await page.evaluate(()=> Array.from(document.querySelectorAll('img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
-    console.log("these are the restricted locales");
-    console.log(restr);
     browser.close()
     const places = [];
     for(let i=0;i<headings.length;i++){
