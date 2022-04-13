@@ -4,7 +4,7 @@ class Site{
     this.name=site.name;
     this.latitude= convertLocationValues(site.latitude);
     this.longitude= convertLocationValues(site.longitude);
-
+    this.image=site.image;
   }
 }
 
@@ -39,13 +39,15 @@ async function addMarkers(county,state){
   });
 
   sites.forEach(site=>{
-    console.log(site.latitude)
+    console.log(site.image)
     if (site.longitude && site.latitude){
       const marker = new google.maps.Marker({
         position: {lat:site.latitude,lng:site.longitude},
         map: map,
         label: site.name,
-        icon: site.image,
+        icon: {url:site.image,
+          scaledSize: new google.maps.Size(100, 100),
+        },
       });
 
     }
