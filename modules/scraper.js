@@ -7,21 +7,19 @@ async function scrape(county,state){
         args: ['--no-sandbox','--disable-setuid-sandbox']
       });
     const url = `https://en.wikipedia.org/wiki/National_Register_of_Historic_Places_listings_in_${county}_County,_${state}`
-    console.log(url)
     const page = await browser.newPage();
     await page.goto(url);
-    const headings = await page.evaluate(()=> Array.from(document.querySelectorAll('.sortable td .mapframe-coord-name a'),element=> [element.textContent,element.href]));
+    const headings = await page.evaluate(()=> Array.from(document.querySelectorAll('.sortable .mapframe-coord-name a'),element=> [element.textContent,element.href]));
     console.log(headings[0])
-    const images = await page.evaluate(()=> Array.from(document.querySelectorAll('tbody img'),element=> element.src,));
+    const images = await page.evaluate(()=> Array.from(document.querySelectorAll('tbody .center a.image img,td .plainlinks.metadata.noprint small a'),element=> element.src,));
     console.log(images[0])
     const addresses = await page.evaluate(()=> Array.from(document.querySelectorAll('.adr span.label'),element=> element.textContent));
-    console.log(addresses[0]);
-    const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.latitude'),element=> element.textContent));
-    const longitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.longitude'),element=> element.textContent));
-    console.log(latitudes[0])
-    console.log(longitudes[0])
+    const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.latitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
+    const longitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.longitude, img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
     const localities = await page.evaluate(()=> Array.from(document.querySelectorAll('.locality'),element=> element.textContent));
-    console.log(localities[0])
+    const restr = await page.evaluate(()=> Array.from(document.querySelectorAll('img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
+    console.log("these are the restricted locales");
+    console.log(restr);
     browser.close()
     const places = [];
     for(let i=0;i<headings.length;i++){
@@ -32,6 +30,7 @@ async function scrape(county,state){
             latitude:latitudes[i],
             longitude:longitudes[i],
             locality:localities[i],
+            googleMapsLink:`https://google.com/maps/place/${latitudes[i]}+${longitudes[i]}`
         }
         places.push(place)
     }
@@ -39,5 +38,5 @@ async function scrape(county,state){
     return places;
 }
 
-scrape(process.argv[2],process.argv[3])
+module.exports = {scrape}
 

@@ -1,18 +1,26 @@
-const {readFile,writeFile} = require('fs')
+const {readFile,writeFile,existsSync} = require('fs')
 const util = require("util")
 const readFilePromise = util.promisify(readFile);
 const writeFilePromise = util.promisify(writeFile)
 
 const doesDataExist = async (county,state)=>{
-    const data = await readFilePromise(`../data/${state}.json`,"utf-8")
-    const obj = JSON.parse(data);
-    if (!obj[county]){
-        console.log(false)
+    const fileExists = await existsSync(`./data/${state}.json`);
+    if (!fileExists){
+        console.log("FILE DOES NOT EXIST");
+        await writeFilePromise(`./data/${state}.json`,"{}",err=>{
+            err?console.log(err):null;
+        })
+        return false;
+    }
+
+    const data = await readFilePromise(`./data/${state}.json`,"utf-8")
+    const obj = await JSON.parse(data);
+    if (obj[county]===undefined){
         return false;
     }
     else {
-        console.log(true)
         return true;}
 }
 
-doesDataExist("Bottineau","North_Dakota");
+
+module.exports = {doesDataExist}
