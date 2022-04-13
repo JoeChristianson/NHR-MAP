@@ -15,6 +15,8 @@ async function scrape(county,state){
     const addresses = await page.evaluate(()=> Array.from(document.querySelectorAll('.adr'),element=> element.innerHTML));
     // const latitudes = await page.evaluate(()=> Array.from(document.querySelectorAll('.adr'),element=> element.textContent));
     const restr = await page.evaluate(()=> Array.from(document.querySelectorAll('img[src="//upload.wikimedia.org/wikipedia/commons/2/22/Address_restricted.PNG"]'),element=> element.textContent));
+    const localities = await page.evaluate(()=> Array.from(document.querySelectorAll('.locality > a'),element=> element.textContent));
+
     browser.close()
     const places = [];
     for(let i=0;i<headings.length;i++){
@@ -27,6 +29,7 @@ async function scrape(county,state){
             address:addresses[i],
             latitude:latitudeString?.split(">")[1],
             longitude:longitudeString?.split(">")[1],
+            locality:localities[i]
             // googleMapsLink:`https://google.com/maps/place/${latitudes[i]}+${longitudes[i]}`
         }
 

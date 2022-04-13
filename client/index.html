@@ -14,6 +14,7 @@
     ></script>
     <script src="./assets/scripts/utils.js"></script>
     <script src="./assets/scripts/nhrCall.js"></script>
+    <script src="./assets/scripts/popUps.js" defer></script>
     <script src="./assets/scripts/eventListeners.js" defer></script>
   </head>
   <body>
@@ -23,6 +24,16 @@
       <input type="text" id="state-input" placeholder="State" />
       <button id="search-btn">Search</button>
     </header>
-    <div id="map"></div>
+    <main>
+      <div id="map"></div>
+      <div class="pop-up hide">
+        <a id="pop-up-link" href="www.google.com">
+          <h3 id="pop-up-name">Crow Wing State Park</h3>
+        </a>
+        <h4 id="pop-up-locality">Nevis, MN</h4>
+        <button id="details-btn">Details</button>
+        <button id="directions-btn">Directions</button>
+      </div>
+    </main>
   </body>
 </html>
