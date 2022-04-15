@@ -5,6 +5,6 @@ if (!APIkey){
 }    
 
 const script = document.createElement("script");
-script.setAttribute("src",`https://maps.googleapis.com/maps/api/js?key=${APIkey}&callback=initMap`);
+script.setAttribute("src",`https://maps.googleapis.com/maps/api/js?key=${APIkey}&callback=currentCoordinates`);
 document.getElementsByTagName("head")[0].appendChild(script);
 

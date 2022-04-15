@@ -14,3 +14,4 @@ function popUpOpen({name,locality,url}){
 closePopUpBtn.on("click",()=>{
     popUp.addClass("hide");
 })
+

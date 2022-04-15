@@ -37,3 +37,21 @@ function convertDMSToDD({degrees, minutes, seconds, direction}) {
     } 
     return dd;
 }
+let coord;
+let currentAllow = false;
+async function currentCoordinates(){
+    let coords;
+    const call = await navigator.geolocation.getCurrentPosition((position)=>{
+        coord = {lat:position.coords.latitude,lng:position.coords.longitude};
+        currentAllow=true;
+        initMap()
+        return position;
+    },()=>{
+        coord={lat:40.7128,lng:-74.006}
+        console.log(coord)
+        initMap()
+    });
+}
+
+
+

@@ -13,20 +13,19 @@ class Site{
 const sites = []
 
 async function initMap() {
-    const uluru = { lat: -25.344, lng: 131.036 };
+
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: uluru,
+      zoom: 10,
+      center: coord,
     });
-    // The marker, positioned at Uluru
-    const marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
-    });
+    if (!currentAllow) return;
+    console.log("Current Allow")
+    addCurrentLocationMarker(map)
 }
 
 async function addMarkers(county,state){
+  const defaultMarkerURL = "https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-File.png"
   sites.length = 0;
   const items = await getData(county,state);
   console.log(items)
@@ -41,20 +40,31 @@ async function addMarkers(county,state){
     zoom: 10,
     center: center,
   });
+  if (currentAllow){
+    addCurrentLocationMarker(map);
+  }
+
+
   sites.forEach(site=>{
+    console.log(site)
+
     if (site.longitude && site.latitude){
+      const infoWindow = new google.maps.InfoWindow({
+        content: infoWindowContent(site)
+      })
+
+
       const marker = new google.maps.Marker({
         position: {lat:site.latitude,lng:site.longitude},
         map: map,
         label: site.name,
-        icon: {url:site.image,
+        icon: {url:site?.image || defaultMarkerURL,
           scaledSize: new google.maps.Size(100, 100),
         },
         title: site.name,
       });
       marker.addListener("click", ()=>{
-        console.log(site.locality)
-        popUpOpen(site)
+        infoWindow.open(map,marker)
       })
     }
   }
@@ -62,3 +72,25 @@ async function addMarkers(county,state){
 }
 
 
+function addCurrentLocationMarker(map){
+  const currentMarkerURL= "https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-File.png";
+  const marker = new google.maps.Marker({
+    position: coord,
+    map: map,
+    icon: {url:currentMarkerURL,
+      scaledSize: new google.maps.Size(50, 50),
+    },
+    title: "current location"
+  });
+}
+
+function infoWindowContent(site){
+  return `
+  <div class="info-cont">
+  <h3>${site.name}</h3>
+  <h4>${site.locality}</h4>
+  <img class="info-window-image" src=${site.image}>
+  <a href=${site.url} target="_blank">More Information</a>
+  </div>
+  `
+}
