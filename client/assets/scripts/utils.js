@@ -1,6 +1,5 @@
 // 46°55′16″N
 function convertLocationValues(value){
-    console.log(value);
     if (typeof value != "string" || value === "" || value.includes("missing") || value.includes("Restricted") || value.includes("Restricted")){
         return undefined;
     }
@@ -17,9 +16,7 @@ function convertLocationValues(value){
             obj[prop] = parseInt(obj[prop])
         }
     }
-    console.log(obj)
     const res = convertDMSToDD(obj);
-    console.log(res);
     return res;
 }
 

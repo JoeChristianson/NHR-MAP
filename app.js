@@ -11,9 +11,13 @@ app.use(cors({
 app.get("/", async (req,res)=>{
     const {query} = req;
     const state = await getCountyData(query.county,query.state);
-    const parsedState = JSON.parse(state);
+    console.log(state?"State data produced":"No state Data")
     const county = JSON.parse(state)[query.county];
-    res.send(county)
+    if (county){
+        res.send(county)
+        console.log("Data sent")
+    }
+    else res.send({adding:true})
 })
 
 app.listen(port, ()=>{

@@ -42,7 +42,6 @@ async function addMarkers(county,state){
     center: center,
   });
   sites.forEach(site=>{
-    console.log(site.image)
     if (site.longitude && site.latitude){
       const marker = new google.maps.Marker({
         position: {lat:site.latitude,lng:site.longitude},
@@ -57,10 +56,9 @@ async function addMarkers(county,state){
         console.log(site.locality)
         popUpOpen(site)
       })
-
     }
   }
   )
-
-
 }
+
+

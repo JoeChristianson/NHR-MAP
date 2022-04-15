@@ -7,11 +7,8 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./assets/scripts/localstorage.js"></script>
     <script src="./assets/scripts/initMap.js"></script>
-    <script
-      async
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD4adZgZWDQxIUdGKvJcB8ArE42C-wegE&callback=initMap"
-    ></script>
     <script src="./assets/scripts/utils.js"></script>
     <script src="./assets/scripts/nhrCall.js"></script>
     <script src="./assets/scripts/popUps.js" defer></script>
@@ -27,6 +24,7 @@
     <main>
       <div id="map"></div>
       <div class="pop-up hide">
+        <button id="close-pop-up">x</button>
         <a id="pop-up-link" href="www.google.com">
           <h3 id="pop-up-name">Crow Wing State Park</h3>
         </a>

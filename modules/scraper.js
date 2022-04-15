@@ -37,7 +37,6 @@ async function scrape(county,state){
     }
     // this is disabled for testing reasons
     write(county,state,places)
-    console.log(places)
     return places;
 }
 
