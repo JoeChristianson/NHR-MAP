@@ -58,7 +58,7 @@ async function addMarkers(county,state){
         position: {lat:site.latitude,lng:site.longitude},
         map: map,
         label: site.name,
-        icon: {url:site?.image || defaultMarkerURL,
+        icon: {url:defaultMarkerURL,
           scaledSize: new google.maps.Size(100, 100),
         },
         title: site.name,

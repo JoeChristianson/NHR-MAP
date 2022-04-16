@@ -5,6 +5,7 @@ const writeFilePromise = util.promisify(writeFile)
 
 const doesDataExist = async (county,state)=>{
     const fileExists = await existsSync(`./data/${state}.json`);
+    console.log(fileExists)
     if (!fileExists){
         console.log("FILE DOES NOT EXIST");
         await writeFilePromise(`./data/${state}.json`,"{}",err=>{
@@ -14,6 +15,7 @@ const doesDataExist = async (county,state)=>{
     }
 
     const data = await readFilePromise(`./data/${state}.json`,"utf-8")
+    console.log("This is the data:" + data + "here it is.")
     const obj = await JSON.parse(data);
     if (obj[county]===undefined){
         return false;
