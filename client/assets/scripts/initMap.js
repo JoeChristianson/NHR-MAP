@@ -25,7 +25,7 @@ async function initMap() {
 }
 
 async function addMarkers(county,state){
-  const defaultMarkerURL = "https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-File.png"
+  const defaultMarkerURL = "https://github.com/JoeChristianson/NHR-MAP/blob/main/icons/icon.png?raw=true"
   sites.length = 0;
   const items = await getData(county,state);
   console.log(items)
@@ -57,9 +57,9 @@ async function addMarkers(county,state){
       const marker = new google.maps.Marker({
         position: {lat:site.latitude,lng:site.longitude},
         map: map,
-        label: site.name,
+        // label: site.name,
         icon: {url:defaultMarkerURL,
-          scaledSize: new google.maps.Size(100, 100),
+          scaledSize: new google.maps.Size(40, 40),
         },
         title: site.name,
       });
