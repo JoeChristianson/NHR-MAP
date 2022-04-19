@@ -17,7 +17,7 @@ app.get("/api", async (req,res)=>{
     const county = JSON.parse(state)[query.county];
     if (county){
         res.send(county)
-        console.log("Data sent")
+        console.log("Data sent, my dude")
     }
     else res.send({adding:true})
 })
