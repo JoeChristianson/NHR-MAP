@@ -26,6 +26,7 @@ async function initMap() {
 
 async function addMarkers(county,state){
   const defaultMarkerURL = "https://github.com/JoeChristianson/NHR-MAP/blob/main/icons/icon.png?raw=true"
+
   sites.length = 0;
   const items = await getData(county,state);
   console.log(items)
@@ -73,7 +74,7 @@ async function addMarkers(county,state){
 
 
 function addCurrentLocationMarker(map){
-  const currentMarkerURL= "https://www.pngall.com/wp-content/uploads/2017/05/Map-Marker-PNG-File.png";
+  const currentMarkerURL= "https://github.com/JoeChristianson/NHR-MAP/blob/main/icons/currentIcon.png?raw=true";
   const marker = new google.maps.Marker({
     position: coord,
     map: map,
