@@ -11,6 +11,7 @@ class Site{
 }
 
 const sites = []
+let currentMarker;
 
 async function initMap() {
 
@@ -81,8 +82,10 @@ function addCurrentLocationMarker(map){
     icon: {url:currentMarkerURL,
       scaledSize: new google.maps.Size(50, 50),
     },
-    title: "current location"
+    title: "current location",
+    id:"current"
   });
+  currentMarker = marker;
 }
 
 function infoWindowContent(site){
@@ -91,6 +94,7 @@ function infoWindowContent(site){
   <h3>${site.name}</h3>
   <h4>${site.locality}</h4>
   <img class="info-window-image" src=${site.image}>
+  <a href="https://www.google.com/maps/dir/?api=1&destination=${site.latitude},${site.longitude}" target="_blank">Directions</a>
   <a href=${site.url} target="_blank">More Information</a>
   </div>
   `

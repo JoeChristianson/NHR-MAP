@@ -11,6 +11,7 @@ const {getCountyData} = require("./modules/getCountyData")
 app.use(express.static('client'))
 
 app.get("/api", async (req,res)=>{
+    console.log("request received");
     const {query} = req;
     const state = await getCountyData(query.county,query.state);
     console.log(state?"State data produced":"No state Data")
@@ -23,5 +24,5 @@ app.get("/api", async (req,res)=>{
 })
 
 app.listen(port, ()=>{
-    console.log("listing on port: "+port)
+    console.log("listening on port: "+port)
 })
