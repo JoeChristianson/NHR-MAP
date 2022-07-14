@@ -21,7 +21,7 @@ async function initMap() {
       center: coord,
     });
     if (!currentAllow) return;
-    console.log("Current Allow")
+
     addCurrentLocationMarker(map)
 }
 
@@ -30,7 +30,7 @@ async function addMarkers(county,state){
 
   sites.length = 0;
   const items = await getData(county,state);
-  console.log(items)
+
   for(let item of items){
 
     const site = new Site(item);
@@ -48,7 +48,7 @@ async function addMarkers(county,state){
 
 
   sites.forEach(site=>{
-    console.log(site)
+
 
     if (site.longitude && site.latitude){
       const infoWindow = new google.maps.InfoWindow({
@@ -80,7 +80,7 @@ function addCurrentLocationMarker(map){
     position: coord,
     map: map,
     icon: {url:currentMarkerURL,
-      scaledSize: new google.maps.Size(50, 50),
+      scaledSize: new google.maps.Size(10, 10),
     },
     title: "current location",
     id:"current"

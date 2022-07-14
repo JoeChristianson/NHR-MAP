@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./assets/scripts/counties.js"></script>
     <script src="./assets/scripts/localstorage.js"></script>
     <script src="./assets/scripts/initMap.js"></script>
     <script src="./assets/scripts/utils.js"></script>
@@ -20,10 +21,13 @@
   </head>
   <body>
     <header>
-      <h2>NHR Map</h2>
-      <input type="text" id="county-input" placeholder="County" />
-      <input type="text" id="state-input" placeholder="State" />
-      <button id="search-btn">Search</button>
+      <h2>National Historic Registry Map</h2>
+      <input type="text" id="county-input" placeholder="Enter County" />
+      <div id="search-dropdown">
+        
+      </div>
+      <!-- <input type="text" id="state-input" placeholder="State" />
+      <button id="search-btn">Search</button> -->
     </header>
     <main>
       <div id="map"></div>
@@ -37,5 +41,10 @@
         <button id="directions-btn">Directions</button>
       </div>
     </main>
+    <div id="loading" class="hide"><h3>
+
+      LOADING...
+    </h3>
+  </div>
   </body>
 </html>

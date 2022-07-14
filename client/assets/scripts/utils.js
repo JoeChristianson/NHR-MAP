@@ -48,7 +48,7 @@ async function currentCoordinates(){
         return position;
     },()=>{
         coord={lat:40.7128,lng:-74.006}
-        console.log(coord)
+
         initMap()
     });
 }
