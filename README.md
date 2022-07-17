@@ -20,7 +20,7 @@ Visit the live site and type in a county in the search field: https://nhr-map.he
 
 ## Screenshot
 
-
+![screenshot of map search results](./nhr-map.herokuapp.com_.png)
 
 ## Notes
 
